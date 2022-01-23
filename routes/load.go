@@ -8,7 +8,8 @@ import (
 
 func Load(d *ext.Dispatcher) {
 	d.AddHandler(handlers.NewCommand("start", startHandler))
+	d.AddHandler(handlers.NewCommand("uncensor", unCensorCmd))
 	d.AddHandler(handlers.NewMessage(func(msg *gotgbot.Message) bool {
-		return msg != nil
+		return msg.Chat.Type == "private"
 	}, mirrorHandler))
 }
